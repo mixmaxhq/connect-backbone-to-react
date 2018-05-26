@@ -631,4 +631,45 @@ describe('connectBackboneToReact', function() {
       assert.equal(setStateSpy.called, false);
     });
   });
+
+  /* eslint-disable no-unused-vars */
+  describe('when returning refs from higher-order-component', function() {
+    beforeEach(function() {
+      const ConnectedTest = connectBackboneToReact(mapModelsToProps, {withRef: true})(TestComponent);
+
+      wrapper = mount(<ConnectedTest models={modelsMap} />);
+      stub = wrapper.find(TestComponent);
+    });
+
+    afterEach(function() {
+      wrapper.unmount();
+    });
+
+    it('returns a component passed in as result of the call to getWrappedObj', function() {
+      assert.ok(wrapper.instance().getWrappedComponent());
+    });
+
+    it('returns a component with equivalent properties to the component passed into connectBackboneToReact', function() {
+      assert.equal(wrapper.instance().getWrappedComponent().props, stub.node.props);
+      assert.equal(wrapper.instance().getWrappedComponent().updater, stub.node.updater);
+    });
+
+    it('returns the proper reference which can then be modified', function() {
+      assert.equal(wrapper.instance().getWrappedComponent().props, stub.node.props);
+      wrapper.instance().getWrappedComponent().props.changeName('newName');
+      assert.equal(wrapper.instance().getWrappedComponent().props, stub.node.props);
+    });
+
+    it('ensures that changes made to the wrapped component via enzyme are reflected in the ref to that component', function() {
+      assert.equal(wrapper.instance().getWrappedComponent().props, stub.node.props);
+      stub.node.props.changeName('anotherNewName');
+      assert.equal(wrapper.instance().getWrappedComponent().props, stub.node.props);
+    });
+
+    it('ensures that changes to the data model are reflected in the ref to the wrapped component', function() {
+      const newName = 'Banana';
+      userModel.set('name', newName);
+      assert.equal(wrapper.instance().getWrappedComponent().props.name, newName);
+    });
+  });
 });
