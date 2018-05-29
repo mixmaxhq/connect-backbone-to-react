@@ -131,6 +131,10 @@ ReactDOM.render(
 );
 ```
 
+### Using the `withRef` parameter
+
+If you set `withRef = true` in the `options` object passed into `connectBackboneToReact`, you can get back a reference to the component you passed in using the instance method `.getWrappedComponent()` on the higher-order-component returned by `connectBackboneToReact(...)(Component)`.
+
 ## Rendering React Within Backbone.View
 
 This library's focus is on sharing Backbone.Models with React Components. It is not concerned with how to render React Components within Backbone.Views. [The React docs provide a possible implementation for this interopt.](https://reactjs.org/docs/integrating-with-other-libraries.html#embedding-react-in-a-backbone-view)
