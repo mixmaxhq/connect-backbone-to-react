@@ -1,10 +1,11 @@
+/* eslint-disable react/prop-types */
 const assert = require('assert');
 const { mount } = require('enzyme');
 const sinon = require('sinon');
 const React = require('react');
 const { Component } = React;
 const { Model, Collection } = require('backbone');
-const BackboneProvider = require('../lib/backbone-provider'); // eslint-disable-line no-unused-vars
+const BackboneProvider = require('../lib/backbone-provider');
 const connectBackboneToReact = require('../lib/connect-backbone-to-react');
 
 describe('BackboneProvider', function() {

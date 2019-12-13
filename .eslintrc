@@ -1,5 +1,5 @@
 {
-  "extends": ["mongodb-js/node"],
+  "extends": ["mongodb-js/node" , "plugin:react/recommended"],
   "env": {
     "browser": true,
     "node": true,

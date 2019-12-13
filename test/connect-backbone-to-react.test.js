@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 const assert = require('assert');
 const { mount } = require('enzyme');
 const sinon = require('sinon');
